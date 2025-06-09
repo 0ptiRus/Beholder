@@ -3,4 +3,20 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_classes">Classes</string>
+    <string name="title_races">Races</string>
+    <string name="title_weapons">Weapons</string>
+    <string name="title_bestiary">Bestiary</string>
+    <string name="class_preview_text">Preview class</string>
+    <string name="choose_a_class">Choose a Class</string>
+    <string name="hitdie_template">Hit Die: d%1$d</string>
+    <string name="proficiencies_template">Proficiencies:\n%1$s</string>
+    <string name="saving_throws_template">Saving Throws:\n%1$s</string>
+    <string name="spellcasting_ability_template">Spellcasting Ability: %1$s\n\n</string>
+    <string name="no_spellcasting_text">No spellcasting ability.</string>
+    <string name="hit_dice_text">Hit Dice</string>
+    <string name="proficiencies_text">Proficiencies</string>
+    <string name="saving_throws_text">Saving Throws</string>
+    <string name="spellcasting_text">Spellcasting</string>
+    <string name="level_progression_text">Level Progression</string>
 </resources>
