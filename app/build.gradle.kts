@@ -64,6 +64,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.exp4j)
+    implementation(libs.expandablelayout)
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
 //    implementation(":B") {
 //        exclude("xpp3")
 //    }

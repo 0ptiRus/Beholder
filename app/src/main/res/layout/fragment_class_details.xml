@@ -1,125 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/classScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/backgroundColor">
+    android:background="?attr/backgroundColor"
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <TextView
-            android:id="@+id/className"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_body"
-            android:paddingBottom="8dp"
-            android:textColor="?attr/colorOnBackground"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <!-- Collapsible Hit Die Section -->
-        <TextView
-            android:id="@+id/hitDieHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_body"
-            android:paddingVertical="8dp"
-            android:text="@string/hit_dice_text"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/hitDie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_body"
-            android:textColor="?attr/colorOnBackground"
-            android:visibility="gone" />
-
-        <!-- Collapsible Proficiencies Section -->
-        <TextView
-            android:id="@+id/proficienciesHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_body"
-            android:paddingVertical="8dp"
-            android:text="@string/proficiencies_text"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/proficiencies"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_body"
-            android:textColor="?attr/colorOnBackground"
-            android:visibility="gone" />
-
-        <!-- Collapsible Saving Throws Section -->
-        <TextView
-            android:id="@+id/savingThrowsHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_body"
-            android:paddingVertical="8dp"
-            android:text="@string/saving_throws_text"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/savingThrows"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_body"
-            android:textColor="?attr/colorOnBackground"
-            android:visibility="gone" />
-
-        <!-- Collapsible Spellcasting Section -->
-        <TextView
-            android:id="@+id/spellcastingHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_body"
-            android:paddingVertical="8dp"
-            android:text="@string/spellcasting_text"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/spellcasting"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_body"
-            android:textColor="?attr/colorOnBackground"
-            android:visibility="gone" />
-
-        <!-- Table placeholder (e.g., Level Progression) -->
-        <TextView
-            android:id="@+id/tableHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_body"
-            android:paddingVertical="8dp"
-            android:text="@string/level_progression_text"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/progressionTable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            android:visibility="gone" />
-
-    </LinearLayout>
-</ScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/classDetailsRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_0dp"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:nestedScrollingEnabled="false"
+        android:padding="@dimen/_16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

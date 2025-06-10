@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingVertical="@dimen/_4dp">
+
+    <TextView
+        android:id="@+id/optionName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_body"
+        android:textAppearance="?attr/textAppearanceBody1"
+        android:textColor="?attr/colorOnBackground"
+        android:textStyle="bold"
+        tools:text="• Магия (+1)" />
+
+    <TextView
+        android:id="@+id/optionDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_body"
+        android:paddingStart="@dimen/_16dp"
+        android:textColor="?attr/colorAccent"
+        android:visibility="gone"
+        tools:text="Дополнительный бонус к Силе."
+        tools:visibility="visible" />
+
+</LinearLayout>

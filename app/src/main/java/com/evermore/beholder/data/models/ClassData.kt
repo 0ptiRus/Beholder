@@ -1,4 +1,4 @@
-package com.evermore.beholder.presentation.classes
+package com.evermore.beholder.data.models
 
 data class ClassData(
     val index: String,

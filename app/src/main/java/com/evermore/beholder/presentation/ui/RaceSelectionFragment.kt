@@ -14,26 +14,21 @@ import com.evermore.beholder.data.models.SelectableEntry
 import com.evermore.beholder.databinding.FragmentItemSelectionBinding
 import com.evermore.beholder.presentation.adapters.SelectableItemAdapter
 
-
-class ClassSelectionFragment : Fragment() {
+class RaceSelectionFragment : Fragment() {
 
     private var _binding: FragmentItemSelectionBinding? = null
     private val binding get() = _binding!!
 
     private val classList = listOf(
-        SelectableEntry("barbarian", "Barbarian", R.drawable.ic_barbarian),
-        SelectableEntry("bard", "Bard", R.drawable.ic_bard),
-        SelectableEntry("cleric", "Cleric", R.drawable.ic_cleric),
-        SelectableEntry("druid", "Druid", R.drawable.ic_druid),
-        SelectableEntry("fighter", "Fighter", R.drawable.ic_fighter),
-        SelectableEntry("monk", "Monk", R.drawable.ic_monk),
-        SelectableEntry("paladin", "Paladin", R.drawable.ic_paladin),
-        SelectableEntry("ranger", "Ranger", R.drawable.ic_ranger),
-        SelectableEntry("rogue", "Rogue", R.drawable.ic_rogue),
-        SelectableEntry("sorcerer", "Sorcerer", R.drawable.ic_sorcerer),
-        SelectableEntry("warlock", "Warlock", R.drawable.ic_warlock),
-        SelectableEntry("wizard", "Wizard", R.drawable.ic_wizard)
-
+        SelectableEntry("dragonborn", "Dragonborn", R.drawable.ic_dragonborn),
+        SelectableEntry("dwarf", "Dwarf", R.drawable.ic_races),
+        SelectableEntry("elf", "Elf", R.drawable.ic_elf),
+        SelectableEntry("gnome", "Gnome", R.drawable.ic_gnome),
+        SelectableEntry("half-elf", "Half-elf", R.drawable.ic_halfelf),
+        SelectableEntry("half-orc", "Half-orc", R.drawable.ic_halforc),
+        SelectableEntry("halfling", "Halfling", R.drawable.ic_human),
+        SelectableEntry("human", "Human", R.drawable.ic_human),
+        SelectableEntry("tiefling", "Tiefling", R.drawable.ic_tiefling),
     )
 
     override fun onCreateView(
@@ -47,8 +42,8 @@ class ClassSelectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.itemsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.itemsRecyclerView.adapter = SelectableItemAdapter(classList) { entry ->
-            val action = ClassSelectionFragmentDirections
-                .actionClassSelectionToClassDetail(entry.index)
+            val action = RaceSelectionFragmentDirections
+                .actionRaceSelectionToClassDetail(entry.index)
             findNavController().navigate(action)
         }
 

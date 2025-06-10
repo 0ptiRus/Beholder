@@ -19,4 +19,23 @@
     <string name="saving_throws_text">Saving Throws</string>
     <string name="spellcasting_text">Spellcasting</string>
     <string name="level_progression_text">Level Progression</string>
+    <string name="race_speed_text">Speed</string>
+    <string name="race_speed_template">Your base walking speed is %1$d feet.</string>
+
+    <string name="race_ability_bonuses_text">Ability Bonuses</string>
+    <string name="race_ability_bonus_options_text">Ability Bonus Options</string>
+    <string name="race_choose_options_template">Choose %1$d</string>
+
+    <string name="race_alignment_text">Alignment</string>
+    <string name="race_age_text">Age</string>
+    <string name="race_size_text">Size</string>
+
+    <string name="race_starting_proficiencies_text">Starting Proficiencies</string>
+    <string name="race_no_starting_proficiencies">No starting proficiencies.</string>
+    <string name="race_starting_proficiency_options_text">Starting Proficiency Options</string>
+
+    <string name="race_languages_text">Languages</string>
+    <string name="race_language_options_text">Language Options</string>
+
+    <string name="race_traits_text">Traits</string>
 </resources>

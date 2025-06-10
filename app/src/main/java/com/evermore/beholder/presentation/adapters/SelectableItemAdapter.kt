@@ -1,17 +1,19 @@
+package com.evermore.beholder.presentation.adapters
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.evermore.beholder.data.models.SelectableEntry
 import com.evermore.beholder.databinding.ItemClassEntryBinding
-import com.evermore.beholder.presentation.classes.ClassEntry
 
-class ClassAdapter(
-    private val items: List<ClassEntry>,
-    private val onItemClick: (ClassEntry) -> Unit
-) : RecyclerView.Adapter<ClassAdapter.ClassViewHolder>() {
+class SelectableItemAdapter(
+    private val items: List<SelectableEntry>,
+    private val onItemClick: (SelectableEntry) -> Unit
+) : RecyclerView.Adapter<SelectableItemAdapter.ClassViewHolder>() {
 
     inner class ClassViewHolder(val binding: ItemClassEntryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(entry: ClassEntry) {
+        fun bind(entry: SelectableEntry) {
             binding.className.text = entry.name
             binding.className.setCompoundDrawablesRelativeWithIntrinsicBounds(
                 entry.iconResId,
