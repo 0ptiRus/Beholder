@@ -1,5 +1,4 @@
-// com/evermore/beholder/presentation/adapters/ClassDetailsAdapter.kt
-package com.evermore.beholder.presentation.adapters // Или com.evermore.beholder.presentation.ui
+package com.evermore.beholder.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,6 @@ import com.evermore.beholder.databinding.ItemClassDetailHeaderBinding
 import com.evermore.beholder.databinding.ItemClassDetailLevelProgressionBinding
 import net.cachapa.expandablelayout.ExpandableLayout
 
-// Перемещено сюда, чтобы Fragment мог его видеть
-// Или вы можете поместить это в отдельный файл ClassDetailItem.kt
 sealed class ClassDetailItem {
     data class Header(val title: String) : ClassDetailItem()
     data class CollapsibleText(
@@ -27,7 +24,6 @@ sealed class ClassDetailItem {
 
 
 class ClassDetailsAdapter(
-    // Изменяем на `var` чтобы можно было назначить новый список
     private var items: MutableList<ClassDetailItem>,
     private val stringProvider: (Int, Any?) -> String
 ) : RecyclerView.Adapter<ClassDetailsAdapter.BaseViewHolder<*>>() {
@@ -114,7 +110,7 @@ class ClassDetailsAdapter(
 
         override fun bind(item: ClassDetailItem.CollapsibleText) {
             binding.collapsibleTextHeader.text =
-                stringProvider(item.stringResId, null) // Исправлено на item.stringResId
+                stringProvider(item.stringResId, null)
             binding.collapsibleContent.text = item.content
 
             if (item.isExpanded) {
@@ -138,17 +134,11 @@ class ClassDetailsAdapter(
         }
     }
 
-    // Метод для обновления данных в адаптере
     fun updateItems(newItems: List<ClassDetailItem>) {
-        // Мы хотим, чтобы `items` в адаптере был `MutableList` для добавления/удаления,
-        // но здесь мы просто заменяем его новым списком.
-        // Чтобы избежать `toMutableList()` в фрагменте, можно просто заменить ссылку
-        this.items = newItems.toMutableList() // Убедитесь, что items MutableList
+        this.items = newItems.toMutableList()
         notifyDataSetChanged()
     }
 
-    // Добавляем метод для доступа к текущему списку элементов (для удобства в фрагменте)
-    // Это свойство теперь будет возвращать копию списка, чтобы избежать внешних модификаций напрямую.
     val currentList: List<ClassDetailItem>
-        get() = items.toList() // Возвращаем неизменяемую копию
+        get() = items.toList()
 }

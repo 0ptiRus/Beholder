@@ -35,7 +35,6 @@ class MonsterDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Теперь адаптеру снова нужен stringProvider
         monsterDetailsAdapter = MonsterDetailsAdapter { stringResId, arg ->
             if (arg != null) {
                 getString(stringResId, arg)

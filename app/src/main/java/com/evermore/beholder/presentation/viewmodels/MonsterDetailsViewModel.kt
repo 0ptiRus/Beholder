@@ -8,10 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.evermore.beholder.R
 import com.evermore.beholder.data.models.Monster
+import com.evermore.beholder.data.repositories.MonsterRepository
 import com.evermore.beholder.presentation.models.MonsterDetailItem
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.launch
 
 // import com.squareup.moshi.JsonAdapter // Эти импорты Moshi не используются для десериализации здесь
@@ -20,7 +18,7 @@ import kotlinx.coroutines.launch
 
 
 class MonsterDetailsViewModel(
-//    private val monsterRepository: MonsterRepository, // Закомментировано, так как используется Gson напрямую
+    private val monsterRepository: MonsterRepository,
     private val stringProvider: (Int, Any?) -> String
 ) : ViewModel() {
 
@@ -30,29 +28,12 @@ class MonsterDetailsViewModel(
     private val _monsterDetailItems = MutableLiveData<List<MonsterDetailItem>>()
     val monsterDetailItems: LiveData<List<MonsterDetailItem>> = _monsterDetailItems
 
-    // Если вы используете Moshi для десериализации, вам не нужен Gson().
-    // Но по текущему коду, кажется, вы пытаетесь использовать Gson,
-    // несмотря на то, что ваши модели аннотированы Moshi.
-    // Если вы хотите использовать Moshi, вам нужно будет это изменить:
-    // private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
-    // private val monsterAdapter: JsonAdapter<Monster> = moshi.adapter(Monster::class.java)
-
 
     fun loadMonsterDetails(monsterIndex: String) {
         viewModelScope.launch {
             try {
-                // Если вы десериализуете JSON с Moshi, вам нужно использовать Moshi здесь.
-                // based on your Monster.kt, it's Moshi annotated.
-                val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
-                val monsterAdapter: JsonAdapter<Monster> = moshi.adapter(Monster::class.java)
-                val monster = monsterAdapter.fromJson(monsterIndex) // Используем адаптер Moshi
-
-                // Если вы хотите продолжать использовать Gson, несмотря на аннотации Moshi,
-                // то вам нужно будет удалить аннотации Moshi из Monster.kt и добавить Gson @SerializedName.
-                // val gson = Gson()
-                // val monster = gson.fromJson(monsterIndex, Monster::class.java)
-
-                _monsterData.postValue(monster!!)
+                val monster = monsterRepository.getMonsterDetails(monsterIndex)
+                _monsterData.postValue(monster)
                 monster.let {
                     _monsterDetailItems.postValue(mapMonsterToDetailItems(it))
                 }

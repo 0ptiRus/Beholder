@@ -52,7 +52,11 @@
         android:id="@+id/classDetailFragment"
         android:name="com.evermore.beholder.presentation.ui.ClassDetailsFragment"
         android:label="Class details"
-        tools:layout="@layout/fragment_class_details" />
+        tools:layout="@layout/fragment_class_details">
+        <argument
+            android:name="index"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/raceDetailFragment"

@@ -9,7 +9,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { ClassDetailsViewModel() }
+    viewModel { ClassDetailsViewModel(get()) }
     viewModel {
         RaceDetailsViewModel { stringResId, arg ->
             val context: Context = get()
@@ -22,13 +22,13 @@ val viewModelModule = module {
     }
     viewModel { BestiarySearchViewModel() }
     viewModel {
-        MonsterDetailsViewModel { stringResId, arg ->
+        MonsterDetailsViewModel(get(), { stringResId, arg ->
             val context: Context = get()
             if (arg != null) {
                 context.getString(stringResId, arg)
             } else {
                 context.getString(stringResId)
             }
-        }
+        })
     }
 }

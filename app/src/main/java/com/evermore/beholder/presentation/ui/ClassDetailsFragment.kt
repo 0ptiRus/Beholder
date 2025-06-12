@@ -1,10 +1,13 @@
+// com/evermore/beholder/presentation/ui/ClassDetailsFragment.kt
 package com.evermore.beholder.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.evermore.beholder.R
 import com.evermore.beholder.databinding.FragmentClassDetailsBinding
@@ -18,8 +21,13 @@ class ClassDetailsFragment : Fragment() {
     private var _binding: FragmentClassDetailsBinding? = null
     private val binding get() = _binding!!
 
+    // Теперь ViewModel инжектируется через Koin, но без параметров при инициализации здесь
+    // ViewModel теперь принимает ClassRepository через Koin, так что Koin сам его предоставит
     private val viewModel: ClassDetailsViewModel by viewModel()
     private lateinit var classDetailsAdapter: ClassDetailsAdapter
+
+    // Получаем аргументы через Safe Args
+    private val args: ClassDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,23 +40,30 @@ class ClassDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Инициализируем адаптер
         classDetailsAdapter = ClassDetailsAdapter(mutableListOf()) { stringResId, _ ->
             getString(stringResId)
         }
         binding.classDetailsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.classDetailsRecyclerView.adapter = classDetailsAdapter
 
+        // Наблюдаем за данными и состояниями ViewModel
         observeClassData()
         observeLevelData()
+        observeLoadingState() // Добавляем наблюдение за состоянием загрузки
+        observeError() // Добавляем наблюдение за ошибками
 
-        // Load data from assets
-        val classJsonString =
-            requireContext().assets.open("class_druid.json").bufferedReader().readText()
-        viewModel.loadClassData(classJsonString)
+        // Получаем 'index' из Safe Args
+        val classIndex = args.index
 
-        val levelsJsonString =
-            requireContext().assets.open("druid_levels.json").bufferedReader().readText()
-        viewModel.loadLevelProgressionData(levelsJsonString)
+        // Загружаем данные из API, используя полученный индекс
+        viewModel.loadDetails(classIndex)
+
+        // Убираем старые вызовы загрузки из ассетов
+        // val classJsonString = requireContext().assets.open("class_druid.json").bufferedReader().readText()
+        // viewModel.loadClassData(classJsonString)
+        // val levelsJsonString = requireContext().assets.open("druid_levels.json").bufferedReader().readText()
+        // viewModel.loadLevelProgressionData(levelsJsonString)
     }
 
     override fun onDestroyView() {
@@ -56,10 +71,23 @@ class ClassDetailsFragment : Fragment() {
         _binding = null
     }
 
-    fun observeClassData() {
-        viewModel.classData.observe(viewLifecycleOwner)
-        { data ->
+    private fun observeLoadingState() {
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.classDetailsRecyclerView.visibility = if (isLoading) View.GONE else View.VISIBLE
+        }
+    }
 
+    private fun observeError() {
+        viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            if (errorMessage != null) {
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                // Возможно, показать сообщение об ошибке на экране, а не только Toast
+            }
+        }
+    }
+
+    fun observeClassData() {
+        viewModel.classData.observe(viewLifecycleOwner) { data ->
             val items = mutableListOf<ClassDetailItem>()
 
             items.add(ClassDetailItem.Header(data.name))
@@ -112,6 +140,9 @@ class ClassDetailsFragment : Fragment() {
                 )
             }
 
+            // Важно: Инициализируем LevelProgression пустым списком,
+            // а затем обновляем его, когда придут данные об уровнях.
+            // Это предотвращает дублирование, если observeLevelData сработает первым.
             items.add(ClassDetailItem.LevelProgression(emptyList()))
 
             classDetailsAdapter.updateItems(items)
@@ -119,17 +150,18 @@ class ClassDetailsFragment : Fragment() {
     }
 
     fun observeLevelData() {
-        viewModel.levelProgression.observe(viewLifecycleOwner)
-        { levelProgressionRows ->
+        viewModel.levelProgression.observe(viewLifecycleOwner) { levelProgressionRows ->
             val currentItems = classDetailsAdapter.currentList.toMutableList()
 
             val existingTableIndex =
                 currentItems.indexOfFirst { it is ClassDetailItem.LevelProgression }
 
             if (existingTableIndex != -1) {
+                // Обновляем существующий элемент LevelProgression
                 currentItems[existingTableIndex] =
                     ClassDetailItem.LevelProgression(levelProgressionRows)
             } else {
+                // Если по какой-то причине элемента еще нет, добавляем его
                 currentItems.add(ClassDetailItem.LevelProgression(levelProgressionRows))
             }
             classDetailsAdapter.updateItems(currentItems)

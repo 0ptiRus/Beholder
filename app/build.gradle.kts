@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.expandablelayout)
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
+    implementation(libs.converter.moshi)
 //    implementation(":B") {
 //        exclude("xpp3")
 //    }
