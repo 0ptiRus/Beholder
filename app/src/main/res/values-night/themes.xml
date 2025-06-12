@@ -1,16 +1,16 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Theme.Beholder" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="backgroundColor">#3E4A47</item>
+        <item name="colorPrimary">#C97A3D</item>
+        <item name="colorPrimaryDark">#6B5B43</item>
+        <item name="colorAccent">#C97A3D</item>
+        <item name="colorOnBackground">#E2D7B9</item>
+        <item name="colorOnSecondary">#B8A68E</item>
+        <item name="colorSecondary">#4A4E43</item>
+        <item name="colorTertiary">#8C6F47</item>
+        <item name="colorError">#D25D5D</item>
+        <item name="colorControlActivated">#A4D68D</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 </resources>

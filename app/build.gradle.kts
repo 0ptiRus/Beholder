@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -20,6 +21,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -36,10 +38,12 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+
 }
 
-dependencies {
 
+dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -51,4 +55,22 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.androidx.navigation.safe.args.gradle.plugin)
+    {
+        exclude("xpp3")
+    }
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.exp4j)
+    implementation(libs.expandablelayout)
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+//    implementation(":B") {
+//        exclude("xpp3")
+//    }
+
+
+
 }

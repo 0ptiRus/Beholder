@@ -1,4 +1,4 @@
-package com.evermore.beholder.presentation.ui.notifications
+package com.evermore.beholder.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.evermore.beholder.databinding.FragmentNotificationsBinding
+import com.evermore.beholder.presentation.viewmodels.NotificationsViewModel
 
 class NotificationsFragment : Fragment() {
 

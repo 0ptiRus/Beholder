@@ -1,0 +1,220 @@
+{
+  "count": 43,
+  "results": [
+    {
+      "index": "ankheg",
+      "name": "Ankheg",
+      "url": "/api/2014/monsters/ankheg"
+    },
+    {
+      "index": "awakened-tree",
+      "name": "Awakened Tree",
+      "url": "/api/2014/monsters/awakened-tree"
+    },
+    {
+      "index": "azer",
+      "name": "Azer",
+      "url": "/api/2014/monsters/azer"
+    },
+    {
+      "index": "bandit-captain",
+      "name": "Bandit Captain",
+      "url": "/api/2014/monsters/bandit-captain"
+    },
+    {
+      "index": "berserker",
+      "name": "Berserker",
+      "url": "/api/2014/monsters/berserker"
+    },
+    {
+      "index": "black-dragon-wyrmling",
+      "name": "Black Dragon Wyrmling",
+      "url": "/api/2014/monsters/black-dragon-wyrmling"
+    },
+    {
+      "index": "bronze-dragon-wyrmling",
+      "name": "Bronze Dragon Wyrmling",
+      "url": "/api/2014/monsters/bronze-dragon-wyrmling"
+    },
+    {
+      "index": "centaur",
+      "name": "Centaur",
+      "url": "/api/2014/monsters/centaur"
+    },
+    {
+      "index": "cult-fanatic",
+      "name": "Cult Fanatic",
+      "url": "/api/2014/monsters/cult-fanatic"
+    },
+    {
+      "index": "druid",
+      "name": "Druid",
+      "url": "/api/2014/monsters/druid"
+    },
+    {
+      "index": "ettercap",
+      "name": "Ettercap",
+      "url": "/api/2014/monsters/ettercap"
+    },
+    {
+      "index": "gargoyle",
+      "name": "Gargoyle",
+      "url": "/api/2014/monsters/gargoyle"
+    },
+    {
+      "index": "gelatinous-cube",
+      "name": "Gelatinous Cube",
+      "url": "/api/2014/monsters/gelatinous-cube"
+    },
+    {
+      "index": "ghast",
+      "name": "Ghast",
+      "url": "/api/2014/monsters/ghast"
+    },
+    {
+      "index": "giant-boar",
+      "name": "Giant Boar",
+      "url": "/api/2014/monsters/giant-boar"
+    },
+    {
+      "index": "giant-constrictor-snake",
+      "name": "Giant Constrictor Snake",
+      "url": "/api/2014/monsters/giant-constrictor-snake"
+    },
+    {
+      "index": "giant-elk",
+      "name": "Giant Elk",
+      "url": "/api/2014/monsters/giant-elk"
+    },
+    {
+      "index": "gibbering-mouther",
+      "name": "Gibbering Mouther",
+      "url": "/api/2014/monsters/gibbering-mouther"
+    },
+    {
+      "index": "green-dragon-wyrmling",
+      "name": "Green Dragon Wyrmling",
+      "url": "/api/2014/monsters/green-dragon-wyrmling"
+    },
+    {
+      "index": "grick",
+      "name": "Grick",
+      "url": "/api/2014/monsters/grick"
+    },
+    {
+      "index": "griffon",
+      "name": "Griffon",
+      "url": "/api/2014/monsters/griffon"
+    },
+    {
+      "index": "hunter-shark",
+      "name": "Hunter Shark",
+      "url": "/api/2014/monsters/hunter-shark"
+    },
+    {
+      "index": "merrow",
+      "name": "Merrow",
+      "url": "/api/2014/monsters/merrow"
+    },
+    {
+      "index": "mimic",
+      "name": "Mimic",
+      "url": "/api/2014/monsters/mimic"
+    },
+    {
+      "index": "minotaur-skeleton",
+      "name": "Minotaur Skeleton",
+      "url": "/api/2014/monsters/minotaur-skeleton"
+    },
+    {
+      "index": "ochre-jelly",
+      "name": "Ochre Jelly",
+      "url": "/api/2014/monsters/ochre-jelly"
+    },
+    {
+      "index": "ogre",
+      "name": "Ogre",
+      "url": "/api/2014/monsters/ogre"
+    },
+    {
+      "index": "ogre-zombie",
+      "name": "Ogre Zombie",
+      "url": "/api/2014/monsters/ogre-zombie"
+    },
+    {
+      "index": "pegasus",
+      "name": "Pegasus",
+      "url": "/api/2014/monsters/pegasus"
+    },
+    {
+      "index": "plesiosaurus",
+      "name": "Plesiosaurus",
+      "url": "/api/2014/monsters/plesiosaurus"
+    },
+    {
+      "index": "polar-bear",
+      "name": "Polar Bear",
+      "url": "/api/2014/monsters/polar-bear"
+    },
+    {
+      "index": "priest",
+      "name": "Priest",
+      "url": "/api/2014/monsters/priest"
+    },
+    {
+      "index": "rhinoceros",
+      "name": "Rhinoceros",
+      "url": "/api/2014/monsters/rhinoceros"
+    },
+    {
+      "index": "rug-of-smothering",
+      "name": "Rug of Smothering",
+      "url": "/api/2014/monsters/rug-of-smothering"
+    },
+    {
+      "index": "saber-toothed-tiger",
+      "name": "Saber-Toothed Tiger",
+      "url": "/api/2014/monsters/saber-toothed-tiger"
+    },
+    {
+      "index": "sea-hag",
+      "name": "Sea Hag",
+      "url": "/api/2014/monsters/sea-hag"
+    },
+    {
+      "index": "silver-dragon-wyrmling",
+      "name": "Silver Dragon Wyrmling",
+      "url": "/api/2014/monsters/silver-dragon-wyrmling"
+    },
+    {
+      "index": "swarm-of-poisonous-snakes",
+      "name": "Swarm of Poisonous Snakes",
+      "url": "/api/2014/monsters/swarm-of-poisonous-snakes"
+    },
+    {
+      "index": "wererat-human",
+      "name": "Wererat, Human Form",
+      "url": "/api/2014/monsters/wererat-human"
+    },
+    {
+      "index": "wererat-hybrid",
+      "name": "Wererat, Hybrid Form",
+      "url": "/api/2014/monsters/wererat-hybrid"
+    },
+    {
+      "index": "wererat-rat",
+      "name": "Wererat, Rat Form",
+      "url": "/api/2014/monsters/wererat-rat"
+    },
+    {
+      "index": "white-dragon-wyrmling",
+      "name": "White Dragon Wyrmling",
+      "url": "/api/2014/monsters/white-dragon-wyrmling"
+    },
+    {
+      "index": "will-o-wisp",
+      "name": "Will-o'-Wisp",
+      "url": "/api/2014/monsters/will-o-wisp"
+    }
+  ]
+}

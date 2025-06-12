@@ -1,4 +1,4 @@
-package com.evermore.beholder.presentation.ui.home
+package com.evermore.beholder.presentation.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
