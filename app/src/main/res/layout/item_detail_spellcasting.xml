@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?attr/backgroundColor"
+    android:layout_marginTop="8dp"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/itemTitle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_headers"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@string/spellcasting_title" />
+
+        <ImageView
+            android:id="@+id/arrowIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_down"
+            app:tint="?attr/colorOnSurface" />
+
+    </LinearLayout>
+
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:id="@+id/expandableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:el_duration="200"
+        app:el_expanded="false"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvSpellcastingLevel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_body"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="16sp"
+                tools:text="Level: 4" />
+
+            <TextView
+                android:id="@+id/tvSpellcastingAbility"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_body"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="16sp"
+                android:layout_marginTop="4dp"
+                tools:text="Spellcasting Ability: Wisdom (DC 12, +4 to hit)" />
+
+            <TextView
+                android:id="@+id/tvCantrips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_body"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                tools:text="Cantrips: druidcraft, produce flame, shillelagh" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/spell_slots_title"
+                android:fontFamily="@font/font_headers"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp" />
+
+            <LinearLayout
+                android:id="@+id/llSpellSlotsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/spells_prepared_title"
+                android:fontFamily="@font/font_headers"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp" />
+
+            <LinearLayout
+                android:id="@+id/llSpellsByLevelContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="4dp" />
+
+        </LinearLayout>
+    </net.cachapa.expandablelayout.ExpandableLayout>
+
+</LinearLayout>

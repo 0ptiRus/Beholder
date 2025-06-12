@@ -38,4 +38,64 @@
     <string name="race_language_options_text">Language Options</string>
 
     <string name="race_traits_text">Traits</string>
+
+    <string name="bestiary_search_title">Bestiary Search</string>
+    <string name="enter_challenge_rating_hint">Enter CR (e.g., 1, ½, 2)</string>
+    <string name="challenge_rating_template">CR: %1$s</string>
+
+        <string name="monster_details_title">Monster Details</string>
+        <string name="monster_basic_info_title">Basic Information</string>
+        <string name="monster_basic_info_template">Size: %1$s\nType: %2$s (%3$s)\nAlignment: %4$s</string>
+
+        <string name="monster_armor_class_title">Armor Class</string>
+        <string name="armor_class_dex_template">AC: %1$d (Dex)</string>
+        <string name="armor_class_spell_template">AC: %1$d (with %2$s)</string>
+        <string name="armor_class_default_template">AC: %1$d (%2$s)</string>
+
+
+        <string name="monster_hit_points_title">Hit Points</string>
+        <string name="monster_hit_points_template">HP: %1$d (%2$s, %3$s)</string>
+
+        <string name="monster_speed_title">Speed</string>
+        <string name="monster_speed_template">Walk: %1$s</string>
+
+        <string name="ability_scores_title">Ability Scores</string>
+        <string name="stat_template">%1$s %2$d (%3$s)</string>
+
+        <string name="monster_proficiencies_title">Proficiencies</string>
+        <string name="monster_proficiency_template">• %1$s (+%2$d)</string>
+        <string name="monster_no_proficiencies">No proficiencies.</string>
+
+        <string name="monster_senses_title">Senses</string>
+        <string name="monster_passive_perception_template">Passive Perception: %1$d</string>
+
+        <string name="monster_languages_title">Languages</string>
+
+        <string name="monster_challenge_rating_title">Challenge Rating &amp; XP</string>
+        <string name="monster_challenge_rating_xp_template">CR: %1$.1f (%2$d XP)</string> <string name="monster_special_abilities_header">Special Abilities</string>
+        <string name="special_ability_template">%1$s:\n%2$s</string>
+
+        <string name="spellcasting_title">Spellcasting</string>
+        <string name="creature_spellcasting_level_template">Spellcaster Level: %1$d</string>
+        <string name="creature_spellcasting_ability_template">Spellcasting Ability: %1$s (DC %2$d, +%3$d to hit)</string>
+        <string name="cantrips_template">Cantrips (at will): %1$s</string>
+        <string name="spell_slots_title">Spell Slots:</string>
+        <string name="spell_slot_template">Level %1$d: %2$d slots</string>
+        <string name="spells_prepared_title">Spells Prepared:</string>
+        <string name="spells_level_header_template">Level %1$d Spells:</string>
+
+        <string name="monster_actions_header">Actions</string>
+        <string name="attack_bonus_template">Attack Bonus: +%1$d</string>
+        <string name="damage_template">Damage: %1$s</string>
+        <string name="damage_option_template">%1$s %2$s %3$s</string>
+
+
+        <string name="monster_legendary_actions_header">Legendary Actions</string>
+        <string name="legendary_action_template">%1$s: %2$s</string>
+
+        <string name="monster_reactions_header">Reactions</string>
+        <string name="reaction_template">%1$s: %2$s</string>
+    <string name="not_available">This is not available!\n</string>
+    <string name="spell_item_text">• %1$s</string>
+
 </resources>

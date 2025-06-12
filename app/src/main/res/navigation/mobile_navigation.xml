@@ -34,15 +34,35 @@
     </fragment>
 
     <fragment
-        android:id="@+id/raceDetailFragment"
-        android:name="com.evermore.beholder.presentation.ui.RaceDetailsFragment"
-        android:label="Race details" />
+        android:id="@+id/navigation_bestiary"
+        android:name="com.evermore.beholder.presentation.ui.BestiarySearchFragment"
+        android:label="Search for a monster">
+
+        <action
+            android:id="@+id/action_monsterSelection_to_monster_Details"
+            app:destination="@id/monsterDetailFragment">
+            <argument
+                android:name="index"
+                app:argType="string" />
+        </action>
+    </fragment>
+
 
     <fragment
         android:id="@+id/classDetailFragment"
         android:name="com.evermore.beholder.presentation.ui.ClassDetailsFragment"
         android:label="Class details"
         tools:layout="@layout/fragment_class_details" />
+
+    <fragment
+        android:id="@+id/raceDetailFragment"
+        android:name="com.evermore.beholder.presentation.ui.RaceDetailsFragment"
+        android:label="Race details" />
+
+    <fragment
+        android:id="@+id/monsterDetailFragment"
+        android:name="com.evermore.beholder.presentation.ui.MonsterDetailsFragment"
+        android:label="Monster details" />
 
 
     <fragment

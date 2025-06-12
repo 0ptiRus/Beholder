@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?attr/backgroundColor"
+    android:layout_marginTop="8dp"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/actionName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_headers"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="Quarterstaff" />
+
+    <TextView
+        android:id="@+id/actionAttackBonus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_body"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        tools:text="Attack Bonus: +2" />
+
+    <TextView
+        android:id="@+id/actionDamage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_body"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        tools:text="Damage: 3 (1d6) bludgeoning damage" />
+
+    <TextView
+        android:id="@+id/actionDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_body"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        tools:text="Melee Weapon Attack: +2 to hit (+4 to hit with shillelagh), reach 5 ft., one target. Hit: 3 (1d6) bludgeoning damage, 4 (1d8) bludgeoning damage if wielded with two hands, or 6 (1d8 + 2) bludgeoning damage with shillelagh." />
+
+</LinearLayout>
