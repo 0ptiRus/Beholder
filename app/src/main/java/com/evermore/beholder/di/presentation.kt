@@ -11,16 +11,16 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { ClassDetailsViewModel(get()) }
     viewModel {
-        RaceDetailsViewModel { stringResId, arg ->
+        RaceDetailsViewModel(get(), { stringResId, arg ->
             val context: Context = get()
             if (arg != null) {
                 context.getString(stringResId, arg)
             } else {
                 context.getString(stringResId)
             }
-        }
+        })
     }
-    viewModel { BestiarySearchViewModel() }
+    viewModel { BestiarySearchViewModel(get()) }
     viewModel {
         MonsterDetailsViewModel(get(), { stringResId, arg ->
             val context: Context = get()

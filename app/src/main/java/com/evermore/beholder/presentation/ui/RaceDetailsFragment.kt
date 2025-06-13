@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.evermore.beholder.databinding.FragmentRaceDetailsBinding
 import com.evermore.beholder.presentation.adapters.RaceDetailsAdapter
@@ -21,6 +23,7 @@ class RaceDetailsFragment : Fragment() {
     private val viewModel: RaceDetailsViewModel by viewModel()
     private lateinit var raceDetailsAdapter: RaceDetailsAdapter
 
+    private val args: RaceDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,9 +52,12 @@ class RaceDetailsFragment : Fragment() {
             raceDetailsAdapter.updateItems(items)
         }
 
-        val raceJsonString =
-            requireContext().assets.open("race.json").bufferedReader().readText()
-        viewModel.loadRaceData(raceJsonString)
+        val raceIndex = args.index
+
+        observeLoadingState()
+        observeError()
+
+        viewModel.loadRaceData(raceIndex)
     }
 
     override fun onDestroyView() {
@@ -59,20 +65,25 @@ class RaceDetailsFragment : Fragment() {
         _binding = null
     }
 
-//    override fun onReferenceItemClick(index: String, name: String) {
-//        val jsonData = dummyReferenceData[index]
-//
-//        if (jsonData != null) {
-//            val bottomSheet = SkillDetailBottomSheetFragment()
-//            val args = Bundle().apply {
-//                putString(SkillDetailBottomSheetFragment.ARG_SKILL_INDEX, index)
-//                putString(SkillDetailBottomSheetFragment.ARG_SKILL_NAME, name)
-//                putString(SkillDetailBottomSheetFragment.ARG_SKILL_JSON_DATA, jsonData)
-//            }
-//            bottomSheet.arguments = args
-//            bottomSheet.show(parentFragmentManager, bottomSheet.tag)
-//        } else {
-//            // Toast.makeText(requireContext(), "No data for $name (Index: $index)", Toast.LENGTH_SHORT).show()
-//        }
-//    }
+    private fun observeLoadingState() {
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                binding.skeletonLayout.shimmerLayout.startShimmer()
+                binding.skeletonLayout.shimmerLayout.visibility = View.VISIBLE
+                binding.raceDetailsRecyclerView.visibility = View.GONE
+            } else {
+                binding.skeletonLayout.shimmerLayout.stopShimmer()
+                binding.skeletonLayout.shimmerLayout.visibility = View.GONE
+                binding.raceDetailsRecyclerView.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun observeError() {
+        viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            if (errorMessage != null) {
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
 }

@@ -2,6 +2,8 @@
 package com.evermore.beholder.presentation.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,17 +49,18 @@ class BestiarySearchFragment : Fragment() {
             bestiaryAdapter.updateMonsters(monsters)
         }
 
-//        binding.challengeRatingInput.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                viewModel.filterMonstersByCr(s.toString())
-//            }
-//            override fun afterTextChanged(s: Editable?) {}
-//        })
+        viewModel.filteredMonsters.observe(viewLifecycleOwner) { monsters ->
+            bestiaryAdapter.updateMonsters(monsters)
+        }
 
-        val raceJsonString =
-            requireContext().assets.open("bestiary_search.json").bufferedReader().readText()
-        viewModel.loadMonsters(raceJsonString)
+        binding.challengeRatingInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.filterMonstersByCr(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
     override fun onDestroyView() {

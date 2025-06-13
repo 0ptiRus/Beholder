@@ -1,9 +1,6 @@
 // com/evermore/beholder/presentation/adapters/MonsterDetailsAdapter.kt
 package com.evermore.beholder.presentation.adapters
 
-// Импортируем ваши макеты
-
-// Импорты для остальных макетов
 
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +15,8 @@ import com.evermore.beholder.databinding.ItemDetailSpellcastingBinding
 import com.evermore.beholder.databinding.ItemDetailStatBlockBinding
 import com.evermore.beholder.presentation.models.MonsterDetailItem
 
-// StringProvider теперь нужен в конструкторе адаптера
 class MonsterDetailsAdapter(
-    private val stringProvider: (Int, Any?) -> String // Для получения строк из StringResId
+    private val stringProvider: (Int, Any?) -> String
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val items = mutableListOf<MonsterDetailItem>()
@@ -99,31 +95,26 @@ class MonsterDetailsAdapter(
 
     class CollapsibleTextViewHolder(
         private val binding: ItemClassDetailCollapsibleTextBinding,
-        private val stringProvider: (Int, Any?) -> String // Теперь CollapsibleTextViewHolder принимает stringProvider
+        private val stringProvider: (Int, Any?) -> String
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.collapsibleTextHeader.setOnClickListener {
                 binding.collapsibleTextContainer.toggle()
-                // Поскольку у вас нет стрелки, логика вращения не нужна.
             }
         }
 
         fun bind(item: MonsterDetailItem.CollapsibleText) {
-            // Разрешаем StringResId для заголовка
             binding.collapsibleTextHeader.text = stringProvider(item.stringResId, null)
             binding.collapsibleContent.text = item.content
 
             if (item.isExpanded) {
-                binding.collapsibleTextContainer.expand(false) // Развернуть без анимации
+                binding.collapsibleTextContainer.expand(false)
             } else {
-                binding.collapsibleTextContainer.collapse(false) // Свернуть без анимации
+                binding.collapsibleTextContainer.collapse(false)
             }
-            // Здесь мы не устанавливаем isClickable = false, потому что "isAlwaysExpanded" нет.
-            // Вместо этого, состояние управляется isExpanded в data class.
         }
     }
 
-    // StatBlockViewHolder, SpellcastingViewHolder, ActionItemViewHolder остаются без изменений
     class StatBlockViewHolder(private val binding: ItemDetailStatBlockBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MonsterDetailItem.StatBlock) {

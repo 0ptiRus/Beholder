@@ -8,25 +8,49 @@
     android:fitsSystemWindows="true"
     tools:context=".presentation.ui.MonsterDetailsFragment">
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/monsterImageCard"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="@dimen/_200dp"
+        android:layout_marginStart="@dimen/_16dp"
+        android:layout_marginTop="@dimen/_16dp"
+        android:layout_marginEnd="@dimen/_16dp"
+        app:cardCornerRadius="@dimen/_8dp"
+        app:cardElevation="@dimen/_4dp"
+        app:layout_constraintBottom_toTopOf="@id/monsterDetailsRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/monsterImageView"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:paddingBottom="?attr/actionBarSize">
-            <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/monsterDetailsRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:nestedScrollingEnabled="false" tools:listitem="@layout/item_class_detail_collapsible_text" />
-        </LinearLayout>
-    </ScrollView>
+            android:contentDescription="@string/monster_image_description"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/monsterDetailsRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_0dp"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:nestedScrollingEnabled="false"
+        android:padding="@dimen/_16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/monsterImageCard"
+        tools:listitem="@layout/item_class_detail_collapsible_text" />
+
+
+    <include
+        android:id="@+id/skeletonLayout"
+        layout="@layout/item_details_skeleton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

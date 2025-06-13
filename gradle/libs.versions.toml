@@ -1,5 +1,6 @@
 [versions]
 agp = "8.10.1"
+coil = "2.6.0"
 expandablelayout = "2.9.2"
 koinCore = "3.5.0"
 kotlin = "2.0.21"
@@ -20,11 +21,13 @@ navigationUiKtx = "2.9.0"
 converterGson = "2.9.0"
 exp4j = "0.4.8"
 retrofit = "2.9.0"
+shimmer = "0.5.0"
 
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationSafeArgsGradlePlugin" }
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterGson" }
 expandablelayout = { module = "com.github.cachapa:ExpandableLayout", version.ref = "expandablelayout" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -44,6 +47,7 @@ exp4j = { module = "net.objecthunter:exp4j", version.ref = "exp4j" }
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlin" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

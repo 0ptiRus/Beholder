@@ -28,8 +28,14 @@ class MonsterDetailsViewModel(
     private val _monsterDetailItems = MutableLiveData<List<MonsterDetailItem>>()
     val monsterDetailItems: LiveData<List<MonsterDetailItem>> = _monsterDetailItems
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
 
     fun loadMonsterDetails(monsterIndex: String) {
+        _isLoading.value = true
         viewModelScope.launch {
             try {
                 val monster = monsterRepository.getMonsterDetails(monsterIndex)
@@ -38,7 +44,9 @@ class MonsterDetailsViewModel(
                     _monsterDetailItems.postValue(mapMonsterToDetailItems(it))
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
+                _error.value = "Error loading details: ${e.localizedMessage}"
+            } finally {
+                _isLoading.value = false
             }
         }
     }
@@ -70,7 +78,8 @@ class MonsterDetailsViewModel(
                 "spell" -> String.format(stringProvider(R.string.armor_class_spell_template, null),
                     ac.value, ac.spell?.name ?: stringProvider(R.string.not_available, null)) // ac.spell тоже nullable
                 else -> String.format(stringProvider(R.string.armor_class_default_template, null),
-                    ac.type, ac.value)
+                    ac.value, ac.type
+                )
             }
         } ?: stringProvider(R.string.not_available, null) // Значение по умолчанию, если armorClass null
         items.add(MonsterDetailItem.CollapsibleText(R.string.monster_armor_class_title, armorClassContent))
@@ -169,7 +178,7 @@ class MonsterDetailsViewModel(
                     ))
                 } else {
                     items.add(MonsterDetailItem.CollapsibleText(
-                        stringResId = 0,
+                        stringResId = R.string.monster_special_abilities_header,
                         content = String.format(stringProvider(R.string.special_ability_template,
                             null), ability.name, ability.desc)
                     ))
@@ -209,7 +218,7 @@ class MonsterDetailsViewModel(
                     stringProvider(R.string.monster_legendary_actions_header, null)))
                 it.forEach { lAction ->
                     items.add(MonsterDetailItem.CollapsibleText(
-                        stringResId = 0,
+                        stringResId = R.string.monster_legendary_actions_header,
                         content = String.format(
                             stringProvider(R.string.legendary_action_template, null),
                             lAction.name, lAction.desc)
@@ -225,7 +234,7 @@ class MonsterDetailsViewModel(
                     stringProvider(R.string.monster_reactions_header, null)))
                 it.forEach { reaction ->
                     items.add(MonsterDetailItem.CollapsibleText(
-                        stringResId = 0,
+                        stringResId = R.string.monster_reactions_header,
                         content = String.format(stringProvider(R.string.reaction_template, null),
                             reaction.name, reaction.desc)
                     ))

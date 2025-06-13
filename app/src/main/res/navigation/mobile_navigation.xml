@@ -61,12 +61,20 @@
     <fragment
         android:id="@+id/raceDetailFragment"
         android:name="com.evermore.beholder.presentation.ui.RaceDetailsFragment"
-        android:label="Race details" />
+        android:label="Race details">
+        <argument
+            android:name="index"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/monsterDetailFragment"
         android:name="com.evermore.beholder.presentation.ui.MonsterDetailsFragment"
-        android:label="Monster details" />
+        android:label="Monster details">
+        <argument
+            android:name="index"
+            app:argType="string" />
+    </fragment>
 
 
     <fragment

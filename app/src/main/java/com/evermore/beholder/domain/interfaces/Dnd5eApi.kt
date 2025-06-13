@@ -4,6 +4,7 @@ import com.evermore.beholder.data.models.BestiaryResponse
 import com.evermore.beholder.data.models.ClassData
 import com.evermore.beholder.data.models.ClassLevel
 import com.evermore.beholder.data.models.Monster
+import com.evermore.beholder.data.models.Race
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -18,6 +19,11 @@ interface Dnd5eApi {
     suspend fun getClassLevels(
         @Path("index") index: String
     ): List<ClassLevel>
+
+    @GET("races/{index}")
+    suspend fun getRace(
+        @Path("index") index: String
+    ): Race
 
     @GET("monsters")
     suspend fun getMonsters(

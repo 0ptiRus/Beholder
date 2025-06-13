@@ -11,7 +11,6 @@ import com.evermore.beholder.data.models.SpellcastingLevel
 import com.evermore.beholder.data.repositories.ClassRepository
 import kotlinx.coroutines.launch
 
-// ViewModel теперь принимает ClassRepository через конструктор
 class ClassDetailsViewModel(private val classRepository: ClassRepository) : ViewModel() {
 
     private val _classData = MutableLiveData<ClassData>()
@@ -20,23 +19,19 @@ class ClassDetailsViewModel(private val classRepository: ClassRepository) : View
     private val _levelProgression = MutableLiveData<List<LevelProgressionRow>>()
     val levelProgression: LiveData<List<LevelProgressionRow>> get() = _levelProgression
 
-    // Добавим LiveData для обработки состояния загрузки/ошибок
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    // Новый метод для загрузки всех данных из API
     fun loadDetails(classIndex: String) {
-        _isLoading.value = true // Начинаем загрузку
+        _isLoading.value = true
         viewModelScope.launch {
             try {
-                // Загружаем данные класса
                 val classResponse = classRepository.getClassDetails(classIndex)
                 _classData.value = classResponse
 
-                // Загружаем данные уровней
                 val levelsResponse = classRepository.getClassLevels(classIndex)
                 val progressionRows = levelsResponse.map { levelData ->
                     val featuresText = levelData.features.joinToString("\n") { it.name }
@@ -51,11 +46,9 @@ class ClassDetailsViewModel(private val classRepository: ClassRepository) : View
                 _levelProgression.value = progressionRows
 
             } catch (e: Exception) {
-                // Обработка ошибок сети или парсинга
                 _error.value = "Error loading details: ${e.localizedMessage}"
-                println("Error loading details for $classIndex: ${e.stackTraceToString()}") // Для отладки
             } finally {
-                _isLoading.value = false // Загрузка завершена (успех или ошибка)
+                _isLoading.value = false
             }
         }
     }

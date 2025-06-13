@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 data class Monster(
     val index: String,
     val name: String,
-    val desc: String, // Оставим не-nullable, если всегда есть
+    val desc: String?, // Оставим не-nullable, если всегда есть
     val size: String,
     val type: String,
     val subtype: String?, // Может быть null
@@ -103,7 +103,14 @@ data class Action(
     val desc: String,
     @Json(name = "attack_bonus") val attackBonus: Int? = null,
     val damage: List<DamageInfo>? = null, // Сделали nullable
-    val actions: List<Action>? = null // Вложенные действия, сделали nullable
+    val actions: List<MiscAction>? = null // Вложенные действия, сделали nullable
+)
+
+@JsonClass(generateAdapter = true)
+data class MiscAction(
+    @Json(name = "action_name") val actionName: String,
+    val count: Int,
+    val type: String
 )
 
 @JsonClass(generateAdapter = true)

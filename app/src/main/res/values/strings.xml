@@ -97,5 +97,6 @@
         <string name="reaction_template">%1$s: %2$s</string>
     <string name="not_available">This is not available!\n</string>
     <string name="spell_item_text">• %1$s</string>
+    <string name="monster_image_description">Image of the creature</string>
 
 </resources>

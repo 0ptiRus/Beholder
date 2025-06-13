@@ -20,4 +20,10 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_class_detail_collapsible_text" />
 
+    <include
+        android:id="@+id/skeletonLayout"
+        layout="@layout/item_details_skeleton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>

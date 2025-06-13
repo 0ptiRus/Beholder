@@ -21,12 +21,9 @@ class ClassDetailsFragment : Fragment() {
     private var _binding: FragmentClassDetailsBinding? = null
     private val binding get() = _binding!!
 
-    // Теперь ViewModel инжектируется через Koin, но без параметров при инициализации здесь
-    // ViewModel теперь принимает ClassRepository через Koin, так что Koin сам его предоставит
     private val viewModel: ClassDetailsViewModel by viewModel()
     private lateinit var classDetailsAdapter: ClassDetailsAdapter
 
-    // Получаем аргументы через Safe Args
     private val args: ClassDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -40,30 +37,20 @@ class ClassDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Инициализируем адаптер
         classDetailsAdapter = ClassDetailsAdapter(mutableListOf()) { stringResId, _ ->
             getString(stringResId)
         }
         binding.classDetailsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.classDetailsRecyclerView.adapter = classDetailsAdapter
 
-        // Наблюдаем за данными и состояниями ViewModel
         observeClassData()
         observeLevelData()
-        observeLoadingState() // Добавляем наблюдение за состоянием загрузки
-        observeError() // Добавляем наблюдение за ошибками
+        observeLoadingState()
+        observeError()
 
-        // Получаем 'index' из Safe Args
         val classIndex = args.index
 
-        // Загружаем данные из API, используя полученный индекс
         viewModel.loadDetails(classIndex)
-
-        // Убираем старые вызовы загрузки из ассетов
-        // val classJsonString = requireContext().assets.open("class_druid.json").bufferedReader().readText()
-        // viewModel.loadClassData(classJsonString)
-        // val levelsJsonString = requireContext().assets.open("druid_levels.json").bufferedReader().readText()
-        // viewModel.loadLevelProgressionData(levelsJsonString)
     }
 
     override fun onDestroyView() {
@@ -73,7 +60,15 @@ class ClassDetailsFragment : Fragment() {
 
     private fun observeLoadingState() {
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            binding.classDetailsRecyclerView.visibility = if (isLoading) View.GONE else View.VISIBLE
+            if (isLoading) {
+                binding.skeletonLayout.shimmerLayout.startShimmer()
+                binding.skeletonLayout.shimmerLayout.visibility = View.VISIBLE
+                binding.classDetailsRecyclerView.visibility = View.GONE
+            } else {
+                binding.skeletonLayout.shimmerLayout.stopShimmer()
+                binding.skeletonLayout.shimmerLayout.visibility = View.GONE
+                binding.classDetailsRecyclerView.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -81,7 +76,6 @@ class ClassDetailsFragment : Fragment() {
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
             if (errorMessage != null) {
                 Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
-                // Возможно, показать сообщение об ошибке на экране, а не только Toast
             }
         }
     }
