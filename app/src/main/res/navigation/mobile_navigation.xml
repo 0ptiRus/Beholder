@@ -2,24 +2,83 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
     <fragment
+        android:id="@+id/navigation_classes"
+        android:name="com.evermore.beholder.presentation.ui.ClassSelectionFragment"
+        android:label="Select Class">
+
+        <action
+            android:id="@+id/action_classSelection_to_classDetail"
+            app:destination="@id/classDetailFragment">
+            <argument
+                android:name="index"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_races"
+        android:name="com.evermore.beholder.presentation.ui.RaceSelectionFragment"
+        android:label="Select Race">
+
+        <action
+            android:id="@+id/action_raceSelection_to_classDetail"
+            app:destination="@id/raceDetailFragment">
+            <argument
+                android:name="index"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_bestiary"
+        android:name="com.evermore.beholder.presentation.ui.BestiarySearchFragment"
+        android:label="Search for a monster">
+
+        <action
+            android:id="@+id/action_monsterSelection_to_monster_Details"
+            app:destination="@id/monsterDetailFragment">
+            <argument
+                android:name="index"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/classDetailFragment"
+        android:name="com.evermore.beholder.presentation.ui.ClassDetailsFragment"
+        android:label="Class details"
+        tools:layout="@layout/fragment_class_details">
+        <argument
+            android:name="index"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/raceDetailFragment"
+        android:name="com.evermore.beholder.presentation.ui.RaceDetailsFragment"
+        android:label="Race details">
+        <argument
+            android:name="index"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/monsterDetailFragment"
+        android:name="com.evermore.beholder.presentation.ui.MonsterDetailsFragment"
+        android:label="Monster details">
+        <argument
+            android:name="index"
+            app:argType="string" />
+    </fragment>
+
+
+    <fragment
         android:id="@+id/navigation_home"
-        android:name="com.evermore.beholder.presentation.ui.home.HomeFragment"
+        android:name="com.evermore.beholder.presentation.ui.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.evermore.beholder.presentation.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.evermore.beholder.presentation.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
 </navigation>

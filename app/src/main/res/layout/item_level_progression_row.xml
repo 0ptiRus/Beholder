@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/backgroundColor"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/_8dp"
+    android:paddingVertical="@dimen/_4dp">
+
+    <TextView
+        android:id="@+id/levelTextView"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/font_body"
+        android:gravity="center"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="@dimen/_14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/profBonusTextView"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/font_body"
+        android:gravity="center"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="@dimen/_14sp" />
+
+    <TextView
+        android:id="@+id/featuresTextView"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:fontFamily="@font/font_body"
+        android:paddingStart="@dimen/_8dp"
+        android:paddingEnd="@dimen/_8dp"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="@dimen/_14sp" />
+
+    <TextView
+        android:id="@+id/spellSlotsTextView"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:fontFamily="@font/font_body"
+        android:paddingStart="@dimen/_8dp"
+        android:textColor="?attr/colorOnBackground"
+        android:textSize="@dimen/_14sp" />
+
+</LinearLayout>

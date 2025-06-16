@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:layout_marginTop="8dp"
+    android:background="?attr/backgroundColor">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ability_scores_title"
+        android:fontFamily="@font/font_headers"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="8dp" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="2"
+        android:alignmentMode="alignBounds"
+        android:columnOrderPreserved="false">
+
+        <TextView
+            android:id="@+id/tvStrength"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:fontFamily="@font/font_body"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            tools:text="STR 10 (+0)" />
+
+        <TextView
+            android:id="@+id/tvDexterity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:fontFamily="@font/font_body"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            tools:text="DEX 10 (+0)" />
+
+        <TextView
+            android:id="@+id/tvConstitution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:fontFamily="@font/font_body"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            tools:text="CON 10 (+0)" />
+
+        <TextView
+            android:id="@+id/tvIntelligence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:fontFamily="@font/font_body"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            tools:text="INT 10 (+0)" />
+
+        <TextView
+            android:id="@+id/tvWisdom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:fontFamily="@font/font_body"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            tools:text="WIS 10 (+0)" />
+
+        <TextView
+            android:id="@+id/tvCharisma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:fontFamily="@font/font_body"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            tools:text="CHA 10 (+0)" />
+
+    </GridLayout>
+
+</LinearLayout>
