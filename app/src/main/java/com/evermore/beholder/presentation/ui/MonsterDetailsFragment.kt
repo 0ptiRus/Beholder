@@ -10,7 +10,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import coil.load // Импорт для Coil
+import coil.load
+import com.evermore.beholder.R
 import com.evermore.beholder.databinding.FragmentMonsterDetailsBinding
 import com.evermore.beholder.presentation.adapters.MonsterDetailsAdapter
 import com.evermore.beholder.presentation.viewmodels.MonsterDetailsViewModel
@@ -26,11 +27,7 @@ class MonsterDetailsFragment : Fragment() {
 
     private val args: MonsterDetailsFragmentArgs by navArgs()
 
-    // Базовый URL для изображений. Он должен соответствовать домену вашего API.
-    // Если ваш API находится по адресу "https://www.dnd5eapi.co/api/",
-    // то базовый URL для изображений будет "https://www.dnd5eapi.co"
-    private val BASE_IMAGE_URL =
-        "https://www.dnd5eapi.co" // Убедитесь, что это правильный базовый URL
+    private lateinit var baseImageUrl: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +40,8 @@ class MonsterDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        baseImageUrl = getString(R.string.api_url)
+
         monsterDetailsAdapter = MonsterDetailsAdapter { stringResId, arg ->
             if (arg != null) {
                 getString(stringResId, arg)
@@ -53,10 +52,19 @@ class MonsterDetailsFragment : Fragment() {
         binding.monsterDetailsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.monsterDetailsRecyclerView.adapter = monsterDetailsAdapter
 
+        observeImageLoad()
+        observeUpdates()
+        observeLoading()
+        observeErrors()
+
+        val monsterIndex = args.index
+        viewModel.loadMonsterDetails(monsterIndex)
+    }
+
+    private fun observeImageLoad() {
         viewModel.monsterData.observe(viewLifecycleOwner) { monster ->
             monster?.image?.let { relativeImageUrl ->
-                // Создаем полный URL, объединяя базовый URL и относительный путь
-                val fullImageUrl = BASE_IMAGE_URL + relativeImageUrl
+                val fullImageUrl = baseImageUrl + relativeImageUrl
 
                 binding.monsterImageView.load(fullImageUrl) {
                     placeholder(android.R.drawable.ic_menu_gallery)
@@ -67,7 +75,9 @@ class MonsterDetailsFragment : Fragment() {
                 binding.monsterImageCard.visibility = View.GONE
             }
         }
+    }
 
+    private fun observeUpdates() {
         viewModel.monsterDetailItems.observe(viewLifecycleOwner) { items ->
             monsterDetailsAdapter.updateItems(items)
             binding.skeletonLayout.shimmerLayout.stopShimmer()
@@ -75,7 +85,9 @@ class MonsterDetailsFragment : Fragment() {
             binding.monsterDetailsRecyclerView.visibility = View.VISIBLE
             binding.monsterImageCard.visibility = View.VISIBLE
         }
+    }
 
+    private fun observeLoading() {
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
                 binding.skeletonLayout.shimmerLayout.startShimmer()
@@ -84,7 +96,9 @@ class MonsterDetailsFragment : Fragment() {
                 binding.monsterImageCard.visibility = View.GONE
             }
         }
+    }
 
+    private fun observeErrors() {
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
             if (errorMessage != null) {
                 Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
@@ -93,17 +107,6 @@ class MonsterDetailsFragment : Fragment() {
                 binding.monsterDetailsRecyclerView.visibility = View.GONE
                 binding.monsterImageCard.visibility = View.GONE
             }
-        }
-
-        val monsterIndex = args.index
-        if (monsterIndex != null) {
-            viewModel.loadMonsterDetails(monsterIndex)
-        } else {
-            binding.skeletonLayout.shimmerLayout.stopShimmer()
-            binding.skeletonLayout.shimmerLayout.visibility = View.GONE
-            binding.monsterDetailsRecyclerView.visibility = View.GONE
-            binding.monsterImageCard.visibility = View.GONE
-            Toast.makeText(requireContext(), "Monster index is missing!", Toast.LENGTH_LONG).show()
         }
     }
 

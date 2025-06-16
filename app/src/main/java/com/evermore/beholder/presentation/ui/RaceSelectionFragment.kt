@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.evermore.beholder.R
-import com.evermore.beholder.data.models.SelectableEntry
 import com.evermore.beholder.databinding.FragmentItemSelectionBinding
 import com.evermore.beholder.presentation.adapters.SelectableItemAdapter
+import com.evermore.beholder.presentation.models.SelectableEntry
 
 class RaceSelectionFragment : Fragment() {
 
@@ -47,16 +47,18 @@ class RaceSelectionFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.itemsRecyclerView) { view, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.itemsRecyclerView) { element, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            view.setPadding(
-                view.paddingLeft,
-                view.paddingTop,
-                view.paddingRight,
+            element.setPadding(
+                element.paddingLeft,
+                element.paddingTop,
+                element.paddingRight,
                 systemBars.bottom
             )
             insets
         }
+
+        binding.itemTitle.text = getString(R.string.race_select_header_text)
     }
 
     override fun onDestroyView() {

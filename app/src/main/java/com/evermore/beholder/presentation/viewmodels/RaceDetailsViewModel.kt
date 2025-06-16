@@ -6,21 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.evermore.beholder.R
-import com.evermore.beholder.data.models.OptionDisplayData
-import com.evermore.beholder.data.models.Race
-import com.evermore.beholder.data.models.RaceDetailItem
+import com.evermore.beholder.data.dto.Race
 import com.evermore.beholder.data.repositories.RaceRepository
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.evermore.beholder.presentation.models.OptionDisplayData
+import com.evermore.beholder.presentation.models.RaceDetailItem
 import kotlinx.coroutines.launch
 
 class RaceDetailsViewModel(
     private val raceRepository: RaceRepository,
     private val stringProvider: (Int, Any?) -> String
 ) : ViewModel() {
-
-    private val _raceData = MutableLiveData<Race>()
-    val raceData: LiveData<Race> = _raceData
 
     private val _raceDetailItems = MutableLiveData<List<RaceDetailItem>>()
     val raceDetailItems: LiveData<List<RaceDetailItem>> = _raceDetailItems
@@ -30,10 +25,6 @@ class RaceDetailsViewModel(
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
-
-    private val moshi = Moshi.Builder()
-        .addLast(KotlinJsonAdapterFactory())
-        .build()
 
     fun loadRaceData(index: String) {
         _isLoading.value = true
@@ -157,7 +148,7 @@ class RaceDetailsViewModel(
         items.add(
             RaceDetailItem.CollapsibleText(
                 stringResId = R.string.race_traits_text,
-                content = traits.toString()
+                content = traits
             )
         )
 

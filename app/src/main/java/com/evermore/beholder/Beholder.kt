@@ -1,6 +1,7 @@
 package com.evermore.beholder
 
 import android.app.Application
+import com.evermore.beholder.di.dataModule
 import com.evermore.beholder.di.domainModule
 import com.evermore.beholder.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -14,7 +15,7 @@ class Beholder : Application() {
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@Beholder)
-            modules(viewModelModule, domainModule)
+            modules(viewModelModule, domainModule, dataModule)
         }
     }
 }

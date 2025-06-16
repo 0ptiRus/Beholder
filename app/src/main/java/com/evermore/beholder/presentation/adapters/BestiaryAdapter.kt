@@ -1,10 +1,11 @@
 package com.evermore.beholder.presentation.adapters
 
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.evermore.beholder.data.models.MonsterResult
+import com.evermore.beholder.data.dto.MonsterResult
 import com.evermore.beholder.databinding.ItemGeneralListItemBinding
 
 class BestiaryAdapter(
@@ -13,6 +14,7 @@ class BestiaryAdapter(
 {
     private var monsters: List<MonsterResult> = emptyList()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateMonsters(newMonsters: List<MonsterResult>)
     {
         this.monsters = newMonsters

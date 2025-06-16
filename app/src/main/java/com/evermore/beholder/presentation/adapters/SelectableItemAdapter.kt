@@ -3,8 +3,8 @@ package com.evermore.beholder.presentation.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.evermore.beholder.data.models.SelectableEntry
 import com.evermore.beholder.databinding.ItemClassEntryBinding
+import com.evermore.beholder.presentation.models.SelectableEntry
 
 class SelectableItemAdapter(
     private val items: List<SelectableEntry>,

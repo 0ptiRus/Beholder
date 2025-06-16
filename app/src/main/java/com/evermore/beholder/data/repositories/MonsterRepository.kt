@@ -1,7 +1,7 @@
 package com.evermore.beholder.data.repositories
 
-import com.evermore.beholder.data.models.BestiaryResponse
-import com.evermore.beholder.data.models.Monster
+import com.evermore.beholder.data.dto.BestiaryResponse
+import com.evermore.beholder.data.dto.Monster
 import com.evermore.beholder.domain.interfaces.Dnd5eApi
 
 class MonsterRepository(private val api: Dnd5eApi) {

@@ -42,9 +42,9 @@ class RaceDetailsFragment : Fragment() {
             insets
         }
 
-        raceDetailsAdapter = RaceDetailsAdapter(mutableListOf(), { stringResId, _ ->
+        raceDetailsAdapter = RaceDetailsAdapter(mutableListOf()) { stringResId, _ ->
             getString(stringResId)
-        })
+        }
         binding.raceDetailsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.raceDetailsRecyclerView.adapter = raceDetailsAdapter
 
@@ -83,6 +83,10 @@ class RaceDetailsFragment : Fragment() {
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
             if (errorMessage != null) {
                 Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                binding.skeletonLayout.shimmerLayout.stopShimmer()
+                binding.skeletonLayout.shimmerLayout.visibility = View.GONE
+                binding.raceDetailsRecyclerView.visibility = View.GONE
+                binding.raceDetailsRecyclerView.visibility = View.GONE
             }
         }
     }

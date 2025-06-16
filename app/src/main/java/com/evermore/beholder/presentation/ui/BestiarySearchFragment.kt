@@ -1,4 +1,3 @@
-// com/evermore/beholder/presentation/ui/BestiarySearchFragment.kt
 package com.evermore.beholder.presentation.ui
 
 import android.os.Bundle
@@ -49,8 +48,16 @@ class BestiarySearchFragment : Fragment() {
             bestiaryAdapter.updateMonsters(monsters)
         }
 
-        viewModel.filteredMonsters.observe(viewLifecycleOwner) { monsters ->
-            bestiaryAdapter.updateMonsters(monsters)
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                binding.skeletonLayout.shimmerLayout.startShimmer()
+                binding.skeletonLayout.shimmerLayout.visibility = View.VISIBLE
+                binding.itemsRecyclerView.visibility = View.GONE
+            } else {
+                binding.skeletonLayout.shimmerLayout.stopShimmer()
+                binding.skeletonLayout.shimmerLayout.visibility = View.GONE
+                binding.itemsRecyclerView.visibility = View.VISIBLE
+            }
         }
 
         binding.challengeRatingInput.addTextChangedListener(object : TextWatcher {

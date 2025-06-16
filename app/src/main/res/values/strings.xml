@@ -1,11 +1,8 @@
 <resources>
     <string name="app_name">Beholder</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_classes">Classes</string>
     <string name="title_races">Races</string>
-    <string name="title_weapons">Weapons</string>
     <string name="title_bestiary">Bestiary</string>
     <string name="class_preview_text">Preview class</string>
     <string name="choose_a_class">Choose a Class</string>
@@ -20,7 +17,6 @@
     <string name="spellcasting_text">Spellcasting</string>
     <string name="level_progression_text">Level Progression</string>
     <string name="race_speed_text">Speed</string>
-    <string name="race_speed_template">Your base walking speed is %1$d feet.</string>
 
     <string name="race_ability_bonuses_text">Ability Bonuses</string>
     <string name="race_ability_bonus_options_text">Ability Bonus Options</string>
@@ -41,10 +37,8 @@
 
     <string name="bestiary_search_title">Bestiary Search</string>
     <string name="enter_challenge_rating_hint">Enter CR (e.g., 1, ½, 2)</string>
-    <string name="challenge_rating_template">CR: %1$s</string>
 
-        <string name="monster_details_title">Monster Details</string>
-        <string name="monster_basic_info_title">Basic Information</string>
+    <string name="monster_basic_info_title">Basic Information</string>
         <string name="monster_basic_info_template">Size: %1$s\nType: %2$s (%3$s)\nAlignment: %4$s</string>
 
         <string name="monster_armor_class_title">Armor Class</string>
@@ -57,9 +51,8 @@
         <string name="monster_hit_points_template">HP: %1$d (%2$s, %3$s)</string>
 
         <string name="monster_speed_title">Speed</string>
-        <string name="monster_speed_template">Walk: %1$s</string>
 
-        <string name="ability_scores_title">Ability Scores</string>
+    <string name="ability_scores_title">Ability Scores</string>
         <string name="stat_template">%1$s %2$d (%3$s)</string>
 
         <string name="monster_proficiencies_title">Proficiencies</string>
@@ -98,5 +91,10 @@
     <string name="not_available">This is not available!\n</string>
     <string name="spell_item_text">• %1$s</string>
     <string name="monster_image_description">Image of the creature</string>
+    <string name="api_url">https://www.dnd5eapi.co</string>
+    <string name="home_welcome_message">Welcome to the Beholder app!\n</string>
+    <string name="home_icon_description">Icon of the app</string>
+    <string name="race_select_header_text">Select a Race</string>
+    <string name="arrow_icon_description">icon of an arrow</string>
 
 </resources>

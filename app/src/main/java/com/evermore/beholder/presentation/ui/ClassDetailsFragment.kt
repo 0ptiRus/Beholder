@@ -1,4 +1,3 @@
-// com/evermore/beholder/presentation/ui/ClassDetailsFragment.kt
 package com.evermore.beholder.presentation.ui
 
 import android.os.Bundle
@@ -37,7 +36,7 @@ class ClassDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        classDetailsAdapter = ClassDetailsAdapter(mutableListOf()) { stringResId, _ ->
+        classDetailsAdapter = ClassDetailsAdapter { stringResId, _ ->
             getString(stringResId)
         }
         binding.classDetailsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -80,7 +79,7 @@ class ClassDetailsFragment : Fragment() {
         }
     }
 
-    fun observeClassData() {
+    private fun observeClassData() {
         viewModel.classData.observe(viewLifecycleOwner) { data ->
             val items = mutableListOf<ClassDetailItem>()
 
@@ -134,16 +133,13 @@ class ClassDetailsFragment : Fragment() {
                 )
             }
 
-            // Важно: Инициализируем LevelProgression пустым списком,
-            // а затем обновляем его, когда придут данные об уровнях.
-            // Это предотвращает дублирование, если observeLevelData сработает первым.
             items.add(ClassDetailItem.LevelProgression(emptyList()))
 
             classDetailsAdapter.updateItems(items)
         }
     }
 
-    fun observeLevelData() {
+    private fun observeLevelData() {
         viewModel.levelProgression.observe(viewLifecycleOwner) { levelProgressionRows ->
             val currentItems = classDetailsAdapter.currentList.toMutableList()
 
@@ -151,11 +147,9 @@ class ClassDetailsFragment : Fragment() {
                 currentItems.indexOfFirst { it is ClassDetailItem.LevelProgression }
 
             if (existingTableIndex != -1) {
-                // Обновляем существующий элемент LevelProgression
                 currentItems[existingTableIndex] =
                     ClassDetailItem.LevelProgression(levelProgressionRows)
             } else {
-                // Если по какой-то причине элемента еще нет, добавляем его
                 currentItems.add(ClassDetailItem.LevelProgression(levelProgressionRows))
             }
             classDetailsAdapter.updateItems(currentItems)

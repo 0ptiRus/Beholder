@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.evermore.beholder.R
-import com.evermore.beholder.data.models.Monster
+import com.evermore.beholder.data.dto.Monster
 import com.evermore.beholder.data.repositories.MonsterRepository
 import com.evermore.beholder.presentation.models.MonsterDetailItem
 import kotlinx.coroutines.launch

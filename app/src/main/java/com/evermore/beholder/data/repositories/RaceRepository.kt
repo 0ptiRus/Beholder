@@ -1,6 +1,6 @@
 package com.evermore.beholder.data.repositories
 
-import com.evermore.beholder.data.models.Race
+import com.evermore.beholder.data.dto.Race
 import com.evermore.beholder.domain.interfaces.Dnd5eApi
 
 class RaceRepository(private val api: Dnd5eApi) {

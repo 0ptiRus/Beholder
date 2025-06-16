@@ -1,14 +1,13 @@
-// com/evermore/beholder/presentation/viewmodels/ClassDetailsViewModel.kt
 package com.evermore.beholder.presentation.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.evermore.beholder.data.models.ClassData
-import com.evermore.beholder.data.models.LevelProgressionRow
-import com.evermore.beholder.data.models.SpellcastingLevel
+import com.evermore.beholder.data.dto.ClassData
+import com.evermore.beholder.data.dto.SpellcastingLevel
 import com.evermore.beholder.data.repositories.ClassRepository
+import com.evermore.beholder.presentation.models.LevelProgressionRow
 import kotlinx.coroutines.launch
 
 class ClassDetailsViewModel(private val classRepository: ClassRepository) : ViewModel() {
@@ -57,7 +56,9 @@ class ClassDetailsViewModel(private val classRepository: ClassRepository) : View
         if (spellcasting == null) return "N/A"
 
         val slots = mutableListOf<String>()
-        if (spellcasting.cantripsKnown > 0) {
+        if (spellcasting.cantripsKnown != null
+            && spellcasting.cantripsKnown > 0
+        ) {
             slots.add("Cantrips: ${spellcasting.cantripsKnown}")
         }
         if (spellcasting.spellSlotsLevel1 > 0) {
@@ -75,16 +76,24 @@ class ClassDetailsViewModel(private val classRepository: ClassRepository) : View
         if (spellcasting.spellSlotsLevel5 > 0) {
             slots.add("Lvl 5: ${spellcasting.spellSlotsLevel5}")
         }
-        if (spellcasting.spellSlotsLevel6 > 0) {
+        if (spellcasting.spellSlotsLevel6 != null
+            && spellcasting.spellSlotsLevel6 > 0
+        ) {
             slots.add("Lvl 6: ${spellcasting.spellSlotsLevel6}")
         }
-        if (spellcasting.spellSlotsLevel7 > 0) {
+        if (spellcasting.spellSlotsLevel7 != null
+            && spellcasting.spellSlotsLevel7 > 0
+        ) {
             slots.add("Lvl 7: ${spellcasting.spellSlotsLevel7}")
         }
-        if (spellcasting.spellSlotsLevel8 > 0) {
+        if (spellcasting.spellSlotsLevel8 != null
+            && spellcasting.spellSlotsLevel8 > 0
+        ) {
             slots.add("Lvl 8: ${spellcasting.spellSlotsLevel8}")
         }
-        if (spellcasting.spellSlotsLevel9 > 0) {
+        if (spellcasting.spellSlotsLevel9 != null
+            && spellcasting.spellSlotsLevel9 > 0
+        ) {
             slots.add("Lvl 9: ${spellcasting.spellSlotsLevel9}")
         }
         return if (slots.isEmpty()) "—" else slots.joinToString("\n")

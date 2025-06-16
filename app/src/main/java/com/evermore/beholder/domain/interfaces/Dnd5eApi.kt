@@ -1,10 +1,10 @@
 package com.evermore.beholder.domain.interfaces
 
-import com.evermore.beholder.data.models.BestiaryResponse
-import com.evermore.beholder.data.models.ClassData
-import com.evermore.beholder.data.models.ClassLevel
-import com.evermore.beholder.data.models.Monster
-import com.evermore.beholder.data.models.Race
+import com.evermore.beholder.data.dto.BestiaryResponse
+import com.evermore.beholder.data.dto.ClassData
+import com.evermore.beholder.data.dto.ClassLevel
+import com.evermore.beholder.data.dto.Monster
+import com.evermore.beholder.data.dto.Race
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

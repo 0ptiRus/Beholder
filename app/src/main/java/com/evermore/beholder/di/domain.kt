@@ -1,8 +1,5 @@
 package com.evermore.beholder.di
 
-import com.evermore.beholder.data.repositories.ClassRepository
-import com.evermore.beholder.data.repositories.MonsterRepository
-import com.evermore.beholder.data.repositories.RaceRepository
 import com.evermore.beholder.domain.interfaces.Dnd5eApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -33,8 +30,4 @@ val domainModule = module {
             .build()
     }
     single { get<Retrofit>().create(Dnd5eApi::class.java) }
-
-    single { ClassRepository(get()) }
-    single { RaceRepository(get()) }
-    single { MonsterRepository(get()) }
 }
