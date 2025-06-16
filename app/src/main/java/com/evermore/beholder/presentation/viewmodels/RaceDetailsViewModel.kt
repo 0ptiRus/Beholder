@@ -4,35 +4,43 @@ package com.evermore.beholder.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.evermore.beholder.R
-import com.evermore.beholder.data.models.OptionDisplayData
-import com.evermore.beholder.data.models.Race
-import com.evermore.beholder.data.models.RaceDetailItem
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.evermore.beholder.data.dto.Race
+import com.evermore.beholder.data.repositories.RaceRepository
+import com.evermore.beholder.presentation.models.OptionDisplayData
+import com.evermore.beholder.presentation.models.RaceDetailItem
+import kotlinx.coroutines.launch
 
-class RaceDetailsViewModel(private val stringProvider: (Int, Any?) -> String) : ViewModel() {
-
-    private val _raceData = MutableLiveData<Race>()
-    val raceData: LiveData<Race> = _raceData
+class RaceDetailsViewModel(
+    private val raceRepository: RaceRepository,
+    private val stringProvider: (Int, Any?) -> String
+) : ViewModel() {
 
     private val _raceDetailItems = MutableLiveData<List<RaceDetailItem>>()
     val raceDetailItems: LiveData<List<RaceDetailItem>> = _raceDetailItems
 
-    private val moshi = Moshi.Builder()
-        .addLast(KotlinJsonAdapterFactory())
-        .build()
-    private val raceAdapter: JsonAdapter<Race> = moshi.adapter(Race::class.java)
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
 
-    fun loadRaceData(jsonString: String) {
-        try {
-            val race = raceAdapter.fromJson(jsonString)
-            race?.let {
-                _raceDetailItems.postValue(mapRaceToDetailItems(it))
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
+
+    fun loadRaceData(index: String) {
+        _isLoading.value = true
+        viewModelScope.launch {
+            try {
+                val race = raceRepository.getRace(index)
+                race.let {
+                    _raceDetailItems.postValue(mapRaceToDetailItems(it))
+                }
+
+            } catch (e: Exception) {
+                _error.value = "Error loading details: ${e.localizedMessage}"
+                println("Error loading details for $index: ${e.stackTraceToString()}") // Для отладки
+            } finally {
+                _isLoading.value = false
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 
@@ -140,7 +148,7 @@ class RaceDetailsViewModel(private val stringProvider: (Int, Any?) -> String) : 
         items.add(
             RaceDetailItem.CollapsibleText(
                 stringResId = R.string.race_traits_text,
-                content = traits.toString()
+                content = traits
             )
         )
 

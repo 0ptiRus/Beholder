@@ -3,8 +3,8 @@ package com.evermore.beholder.presentation.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.evermore.beholder.data.models.LevelProgressionRow
 import com.evermore.beholder.databinding.ItemLevelProgressionRowBinding
+import com.evermore.beholder.presentation.models.LevelProgressionRow
 
 class ProgressionTableAdapter(private val rows: List<LevelProgressionRow>) :
     RecyclerView.Adapter<ProgressionTableAdapter.ProgressionRowViewHolder>() {

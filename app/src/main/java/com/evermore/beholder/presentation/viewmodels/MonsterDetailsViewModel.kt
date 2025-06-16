@@ -7,11 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.evermore.beholder.R
-import com.evermore.beholder.data.models.Monster
+import com.evermore.beholder.data.dto.Monster
+import com.evermore.beholder.data.repositories.MonsterRepository
 import com.evermore.beholder.presentation.models.MonsterDetailItem
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.launch
 
 // import com.squareup.moshi.JsonAdapter // Эти импорты Moshi не используются для десериализации здесь
@@ -20,7 +18,7 @@ import kotlinx.coroutines.launch
 
 
 class MonsterDetailsViewModel(
-//    private val monsterRepository: MonsterRepository, // Закомментировано, так как используется Gson напрямую
+    private val monsterRepository: MonsterRepository,
     private val stringProvider: (Int, Any?) -> String
 ) : ViewModel() {
 
@@ -30,34 +28,25 @@ class MonsterDetailsViewModel(
     private val _monsterDetailItems = MutableLiveData<List<MonsterDetailItem>>()
     val monsterDetailItems: LiveData<List<MonsterDetailItem>> = _monsterDetailItems
 
-    // Если вы используете Moshi для десериализации, вам не нужен Gson().
-    // Но по текущему коду, кажется, вы пытаетесь использовать Gson,
-    // несмотря на то, что ваши модели аннотированы Moshi.
-    // Если вы хотите использовать Moshi, вам нужно будет это изменить:
-    // private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
-    // private val monsterAdapter: JsonAdapter<Monster> = moshi.adapter(Monster::class.java)
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
 
     fun loadMonsterDetails(monsterIndex: String) {
+        _isLoading.value = true
         viewModelScope.launch {
             try {
-                // Если вы десериализуете JSON с Moshi, вам нужно использовать Moshi здесь.
-                // based on your Monster.kt, it's Moshi annotated.
-                val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
-                val monsterAdapter: JsonAdapter<Monster> = moshi.adapter(Monster::class.java)
-                val monster = monsterAdapter.fromJson(monsterIndex) // Используем адаптер Moshi
-
-                // Если вы хотите продолжать использовать Gson, несмотря на аннотации Moshi,
-                // то вам нужно будет удалить аннотации Moshi из Monster.kt и добавить Gson @SerializedName.
-                // val gson = Gson()
-                // val monster = gson.fromJson(monsterIndex, Monster::class.java)
-
-                _monsterData.postValue(monster!!)
+                val monster = monsterRepository.getMonsterDetails(monsterIndex)
+                _monsterData.postValue(monster)
                 monster.let {
                     _monsterDetailItems.postValue(mapMonsterToDetailItems(it))
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
+                _error.value = "Error loading details: ${e.localizedMessage}"
+            } finally {
+                _isLoading.value = false
             }
         }
     }
@@ -89,7 +78,8 @@ class MonsterDetailsViewModel(
                 "spell" -> String.format(stringProvider(R.string.armor_class_spell_template, null),
                     ac.value, ac.spell?.name ?: stringProvider(R.string.not_available, null)) // ac.spell тоже nullable
                 else -> String.format(stringProvider(R.string.armor_class_default_template, null),
-                    ac.type, ac.value)
+                    ac.value, ac.type
+                )
             }
         } ?: stringProvider(R.string.not_available, null) // Значение по умолчанию, если armorClass null
         items.add(MonsterDetailItem.CollapsibleText(R.string.monster_armor_class_title, armorClassContent))
@@ -188,7 +178,7 @@ class MonsterDetailsViewModel(
                     ))
                 } else {
                     items.add(MonsterDetailItem.CollapsibleText(
-                        stringResId = 0,
+                        stringResId = R.string.monster_special_abilities_header,
                         content = String.format(stringProvider(R.string.special_ability_template,
                             null), ability.name, ability.desc)
                     ))
@@ -228,7 +218,7 @@ class MonsterDetailsViewModel(
                     stringProvider(R.string.monster_legendary_actions_header, null)))
                 it.forEach { lAction ->
                     items.add(MonsterDetailItem.CollapsibleText(
-                        stringResId = 0,
+                        stringResId = R.string.monster_legendary_actions_header,
                         content = String.format(
                             stringProvider(R.string.legendary_action_template, null),
                             lAction.name, lAction.desc)
@@ -244,7 +234,7 @@ class MonsterDetailsViewModel(
                     stringProvider(R.string.monster_reactions_header, null)))
                 it.forEach { reaction ->
                     items.add(MonsterDetailItem.CollapsibleText(
-                        stringResId = 0,
+                        stringResId = R.string.monster_reactions_header,
                         content = String.format(stringProvider(R.string.reaction_template, null),
                             reaction.name, reaction.desc)
                     ))

@@ -1,12 +1,17 @@
 // com/evermore/beholder/presentation/ui/MonsterDetailsFragment.kt
+
 package com.evermore.beholder.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
+import com.evermore.beholder.R
 import com.evermore.beholder.databinding.FragmentMonsterDetailsBinding
 import com.evermore.beholder.presentation.adapters.MonsterDetailsAdapter
 import com.evermore.beholder.presentation.viewmodels.MonsterDetailsViewModel
@@ -20,9 +25,9 @@ class MonsterDetailsFragment : Fragment() {
     private val viewModel: MonsterDetailsViewModel by viewModel()
     private lateinit var monsterDetailsAdapter: MonsterDetailsAdapter
 
-    companion object {
-        const val ARG_MONSTER_INDEX = "monster_index"
-    }
+    private val args: MonsterDetailsFragmentArgs by navArgs()
+
+    private lateinit var baseImageUrl: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +40,8 @@ class MonsterDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Теперь адаптеру снова нужен stringProvider
+        baseImageUrl = getString(R.string.api_url)
+
         monsterDetailsAdapter = MonsterDetailsAdapter { stringResId, arg ->
             if (arg != null) {
                 getString(stringResId, arg)
@@ -46,21 +52,67 @@ class MonsterDetailsFragment : Fragment() {
         binding.monsterDetailsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.monsterDetailsRecyclerView.adapter = monsterDetailsAdapter
 
+        observeImageLoad()
+        observeUpdates()
+        observeLoading()
+        observeErrors()
+
+        val monsterIndex = args.index
+        viewModel.loadMonsterDetails(monsterIndex)
+    }
+
+    private fun observeImageLoad() {
+        viewModel.monsterData.observe(viewLifecycleOwner) { monster ->
+            monster?.image?.let { relativeImageUrl ->
+                val fullImageUrl = baseImageUrl + relativeImageUrl
+
+                binding.monsterImageView.load(fullImageUrl) {
+                    placeholder(android.R.drawable.ic_menu_gallery)
+                    error(android.R.drawable.ic_delete)
+                }
+            } ?: run {
+                binding.monsterImageView.visibility = View.GONE
+                binding.monsterImageCard.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun observeUpdates() {
         viewModel.monsterDetailItems.observe(viewLifecycleOwner) { items ->
             monsterDetailsAdapter.updateItems(items)
+            binding.skeletonLayout.shimmerLayout.stopShimmer()
+            binding.skeletonLayout.shimmerLayout.visibility = View.GONE
+            binding.monsterDetailsRecyclerView.visibility = View.VISIBLE
+            binding.monsterImageCard.visibility = View.VISIBLE
         }
+    }
 
-        //val monsterIndex = arguments?.getString(ARG_MONSTER_INDEX)
-        val monsterIndex = requireContext().assets.open("monster.json").bufferedReader().readText()
-        if (monsterIndex != null) {
-            viewModel.loadMonsterDetails(monsterIndex)
-        } else {
-            // TODO: Обработка ошибки, если индекс не передан
+    private fun observeLoading() {
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                binding.skeletonLayout.shimmerLayout.startShimmer()
+                binding.skeletonLayout.shimmerLayout.visibility = View.VISIBLE
+                binding.monsterDetailsRecyclerView.visibility = View.GONE
+                binding.monsterImageCard.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun observeErrors() {
+        viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            if (errorMessage != null) {
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                binding.skeletonLayout.shimmerLayout.stopShimmer()
+                binding.skeletonLayout.shimmerLayout.visibility = View.GONE
+                binding.monsterDetailsRecyclerView.visibility = View.GONE
+                binding.monsterImageCard.visibility = View.GONE
+            }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.skeletonLayout.shimmerLayout.stopShimmer()
         _binding = null
     }
 }

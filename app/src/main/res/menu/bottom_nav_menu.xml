@@ -12,11 +12,6 @@
         android:title="@string/title_races" />
 
     <item
-        android:id="@+id/navigation_weapons"
-        android:icon="@drawable/ic_weapons"
-        android:title="@string/title_weapons" />
-
-    <item
         android:id="@+id/navigation_bestiary"
         android:icon="@drawable/ic_bestiary"
         android:title="@string/title_bestiary" />
